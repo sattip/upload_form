@@ -1,8 +1,8 @@
 <?php
 include("database.php");
 
-$first_name = $_POST["first_name"];
-$last_name = $_POST["last_name"];
+$first_name = mysql_real_escape_string($_POST["first_name"]);
+$last_name = mysql_real_escape_string($_POST["last_name"]);
 
 if ($_FILES["file"]["error"] > 0){
    echo "Error: " . $_FILES["file"]["error"] . "<br>";
@@ -16,6 +16,8 @@ if ($_FILES["file"]["error"] > 0){
 }
 
 
+mysql_query("INSERT INTO `uploadform`.`users` (`id`, `firstname`, `lastname`, `photo`) VALUES (NULL, '$first_name', '$last_name', '$imagepath');") or die(mysql_error());
+
 // display the output
   echo "<p>";
   echo "First Name: $first_name<br />";
@@ -24,4 +26,4 @@ if ($_FILES["file"]["error"] > 0){
 
 
 ?>
-<img src="<? echo $imagepath; ?>">
+<img src="<?php echo $imagepath; ?>" width="200px">

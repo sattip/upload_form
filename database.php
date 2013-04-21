@@ -6,7 +6,7 @@
 	$dbServer = "localhost";
 	$dbUser = "root";
 	$dbPass = "";
-	$dbName = "database";
+	$dbName = "uploadform";
 
 	function ConnectToDb ($server, $user, $pass, $database) {
 		// Connect to the database and return
@@ -14,8 +14,8 @@
 		// not a connection could be made.
 		$link   = mysql_pconnect($server, $user, $pass);
 		$select = mysql_select_db($database, $link);
-		mysql_query('set character set greek',$link);       
-         mysql_query("SET NAMES 'greek'",$link);
+		mysql_query('set character set utf-8',$link);       
+        mysql_query("SET NAMES 'utf-8'",$link);
 		if (!$link || !$select)
 			return false;
 		else
