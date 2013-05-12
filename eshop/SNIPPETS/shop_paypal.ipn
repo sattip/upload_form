@@ -1,0 +1,236 @@
+//Paypal IPN (Instant Payment Notification) for plaincart (etomite version)
+// by Cris D.  Save as snippet 'shop_paypal.ipn'
+
+//Paypal class adapted from:
+/*******************************************************************************
+ *                      PHP Paypal IPN Integration Class
+ *******************************************************************************
+ *      Author:     Micah Carrick
+ *      Email:      email@micahcarrick.com
+ *      Website:    http://www.micahcarrick.com
+*/
+
+class paypal_class {
+    
+   var $last_error;                 // holds the last error encountered
+   
+   var $ipn_log;                    // bool: log IPN results to text file?
+   
+   var $ipn_log_file;               // filename of the IPN log
+   var $ipn_response;               // holds the IPN response from paypal   
+   var $ipn_data = array();         // array contains the POST values for IPN
+   
+   var $fields = array();           // array holds the fields to submit to paypal
+
+   
+   function paypal_class() {
+       
+      // initialization constructor.  Called when class is created.
+      
+      $this->paypal_url = 'https://www.paypal.com/cgi-bin/webscr';
+      
+      $this->last_error = '';
+      
+      $this->ipn_log_file = '.ipn_results.log';
+      $this->ipn_log = true; 
+      $this->ipn_response = '';
+      
+      // populate $fields array with a few default values.  See the paypal
+      // documentation for a list of fields and their data types. These defaul
+      // values can be overwritten by the calling script.
+
+      $this->add_field('rm','2');           // Return method = POST
+      $this->add_field('cmd','_xclick'); 
+      
+   }
+   function add_field($field, $value) {
+      
+      // adds a key=>value pair to the fields array, which is what will be 
+      // sent to paypal as POST variables.  If the value is already in the 
+      // array, it will be overwritten.
+            
+      $this->fields["$field"] = $value;
+   }
+   
+   
+   function validate_ipn() {
+
+      // parse the paypal URL
+      $url_parsed=parse_url($this->paypal_url);        
+
+      // generate the post string from the _POST vars aswell as load the
+      // _POST vars into an arry so we can play with them from the calling
+      // script.
+      $post_string = '';    
+      foreach ($_POST as $field=>$value) { 
+         $this->ipn_data["$field"] = $value;
+         $post_string .= $field.'='.urlencode(stripslashes($value)).'&'; 
+      }
+      $post_string.="cmd=_notify-validate"; // append ipn command
+
+      // open the connection to paypal
+      $fp = fsockopen($url_parsed[host],"80",$err_num,$err_str,30); 
+      if(!$fp) {
+          
+         // could not open the connection.  If loggin is on, the error message
+         // will be in the log.
+         $this->last_error = "fsockopen error no. $errnum: $errstr";
+         $this->log_ipn_results(false);       
+         return false;
+         
+      } else { 
+ 
+         // Post the data back to paypal
+         fputs($fp, "POST $url_parsed[path] HTTP/1.1\r\n"); 
+         fputs($fp, "Host: $url_parsed[host]\r\n"); 
+         fputs($fp, "Content-type: application/x-www-form-urlencoded\r\n"); 
+         fputs($fp, "Content-length: ".strlen($post_string)."\r\n"); 
+         fputs($fp, "Connection: close\r\n\r\n"); 
+         fputs($fp, $post_string . "\r\n\r\n"); 
+
+         // loop through the response from the server and append to variable
+         while(!feof($fp)) { 
+            $this->ipn_response .= fgets($fp, 1024); 
+         } 
+
+         fclose($fp); // close connection
+
+      }
+      
+      if (eregi("VERIFIED",$this->ipn_response)) {
+  
+         // Valid IPN transaction.
+         $this->log_ipn_results(true);
+         return true;       
+         
+      } else {
+  
+         // Invalid IPN transaction.  Check the log for details.
+         $this->last_error = 'IPN Validation Failed.';
+         $this->log_ipn_results(false);   
+         return false;
+         
+      }
+      
+   }
+   
+   function log_ipn_results($success) {
+       
+      if (!$this->ipn_log) return;  // is logging turned off?
+      
+      // Timestamp
+      $text = '['.date('m/d/Y g:i A').'] - '; 
+      
+      // Success or failure being logged?
+      if ($success) $text .= "SUCCESS!\n";
+      else $text .= 'FAIL: '.$this->last_error."\n";
+      
+      // Log the POST variables
+      $text .= "IPN POST Vars from Paypal:\n";
+      foreach ($this->ipn_data as $key=>$value) {
+         $text .= "$key=$value, ";
+      }
+ 
+      // Log the response from the paypal server
+      $text .= "\nIPN Response from Paypal Server:\n ".$this->ipn_response;
+      
+      // Write to log
+      $fp=fopen($this->ipn_log_file,'a');
+      fwrite($fp, $text . "\n\n"); 
+
+      fclose($fp);  // close file
+   }
+
+}         
+
+$p = new paypal_class;
+$p->paypal_url = 'https://www.sandbox.paypal.com/cgi-bin/webscr';   // testing paypal url
+//$p->paypal_url = 'https://www.paypal.com/cgi-bin/webscr';     // paypal url
+
+$this_script = $etomite->makeURL($etomite->documentIdentifier,'','?action=ipn');
+//currently not used this is set in the plaincart/library/config.php file.
+
+require_once 'plaincart/library/common_in_etomite.php';
+require_once 'plaincart/library/config.php';
+require_once 'plaincart/library/database.php';
+
+switch ($action) {
+         
+   case 'ipn':          // Paypal is calling page for IPN validation...
+   
+      // It's important to remember that paypal calling this script.  There
+      // is no output here.  This is where you validate the IPN data and if it's
+      // valid, update your database to signify that the user has payed.  If
+      // you try and use an echo or printf function here it's not going to do you
+      // a bit of good.  This is on the "backend".  That is why, by default, the
+      // class logs all IPN data to a text file.
+      
+      if ($p->validate_ipn()) {
+          
+        // check that the invoice has not been previously processed
+        $sql1 = "SELECT od_status
+                FROM tbl_order
+                WHERE od_id = ".$p->ipn_data['invoice']."";
+
+        $result = dbQuery($sql1);
+
+        // if no invoice with such number is found, exit
+        if (dbNumRows($result) == 0) {
+           
+        } else {
+           
+        
+            $row = dbFetchAssoc($result);
+            
+            // process this order only if the status is still 'New'
+            if ($row['od_status'] !== 'New') {
+            
+            } else {
+            
+
+                // check that the buyer sent the right amount of money
+                $sql2 = "SELECT SUM(pd_price * od_qty) AS subtotal
+                        FROM tbl_order_item oi, tbl_product p
+                        WHERE oi.od_id = ".$p->ipn_data['invoice']." AND oi.pd_id = p.pd_id
+                        GROUP by oi.od_id";
+                $result = dbQuery($sql2);
+                $row    = dbFetchAssoc($result);		
+                
+                $subTotal = $row['subtotal'];
+                $total    = $subTotal + $shopConfig['shippingCost'];
+                            
+                if ($p->ipn_data['payment_gross'] != $total) {
+                  
+                } else {
+                
+                   
+			$invoice = $p->ipn_data['invoice'];
+			$memo    = $p->ipn_data['memo'];
+			if (!get_magic_quotes_gpc()) {
+				$memo = addslashes($memo);
+				}
+					
+                    // ok, so this order looks perfectly okay
+                    // now we can update the order status to 'Paid'
+                    // update the memo too
+                    $sql3 = "UPDATE tbl_order
+                            SET od_status = 'Paid', od_memo = '$memo', od_last_update = NOW()
+                            WHERE od_id = $invoice";
+                    $result = dbQuery($sql3);
+                }
+            }
+        }
+if($shopConfig['sendOrderEmail'] == 'y'){
+         //Send a notification email of success of payment
+         $subject = 'Instant Payment Notification - Recieved Payment';
+         $to = $shopConfig['email']; 
+         $body =  "An instant payment notification was successfully recieved\n";
+         $body .= "from ".$p->ipn_data['payer_email']." on ".date('m/d/Y');
+         $body .= " at ".date('g:i A')."\n\nDetails:\n";
+                           
+         foreach ($p->ipn_data as $key => $value) { $body .= "\n$key: $value"; }
+         mail($to, $subject, $body);
+           } 
+      }
+      break;
+ }     

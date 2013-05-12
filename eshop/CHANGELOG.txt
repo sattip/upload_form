@@ -1,0 +1,7 @@
+2008/02/14: 
+>Deleted the SQL file that had old snippets.
+>Changed in SNIPPET shop_paypal.ipn Line 153 to 'common_in_etomite.php'
+2008/02/15:
+>Changed in snippet shop_paypal.ipn: Added a check to only send IPN email if set to 'Yes' in shop config.
+>Changed sql file: removed all comments to make it compatible with older versions of MySQL.
+>Changed in snippet shop_success.php: corrected the email link to view order.
