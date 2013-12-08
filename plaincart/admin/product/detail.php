@@ -31,33 +31,33 @@ if ($pd_image) {
 <form action="processProduct.php?action=addProduct" method="post" enctype="multipart/form-data" name="frmAddProduct" id="frmAddProduct">
  <table width="100%" border="0" align="center" cellpadding="5" cellspacing="1" class="entryTable">
   <tr> 
-   <td width="150" class="label">Κατηγορία</td>
+   <td width="150" class="label">Category</td>
    <td class="content"><?php echo $cat_name; ?></td>
   </tr>
   <tr> 
-   <td width="150" class="label">Όνομα Προϊόντος</td>
+   <td width="150" class="label">Product Name</td>
    <td class="content"> <?php echo $pd_name; ?></td>
   </tr>
   <tr> 
-   <td width="150" class="label">Περιγραφή</td>
+   <td width="150" class="label">Description</td>
    <td class="content"><?php echo nl2br($pd_description); ?> </td>
   </tr>
   <tr> 
-   <td width="150" height="36" class="label">Τιμή</td>
+   <td width="150" height="36" class="label">Price</td>
    <td class="content"><?php echo number_format($pd_price, 2); ?> </td>
   </tr>
   <tr> 
-   <td width="150" class="label">Ποσότητα σε Αποθέματα</td>
+   <td width="150" class="label">Qty In Stock</td>
    <td class="content"><?php echo number_format($pd_qty); ?> </td>
   </tr>
   <tr> 
-   <td width="150" class="label">Εικόνα</td>
+   <td width="150" class="label">Image</td>
    <td class="content"><img src="<?php echo $pd_image; ?>"></td>
   </tr>
  </table>
  <p align="center"> 
-  <input name="btnModifyProduct" type="button" id="btnModifyProduct" value="Επεξεργασία Προϊόντος" onClick="window.location.href='index.php?view=modify&productId=<?php echo $productId; ?>';" class="box">
+  <input name="btnModifyProduct" type="button" id="btnModifyProduct" value="Modify Product" onClick="window.location.href='index.php?view=modify&productId=<?php echo $productId; ?>';" class="box">
   &nbsp;&nbsp;
-  <input name="btnBack" type="button" id="btnBack" value=" Επιστροφή " onClick="window.history.back();" class="box">
+  <input name="btnBack" type="button" id="btnBack" value=" Back " onClick="window.history.back();" class="box">
  </p>
 </form>

@@ -2,6 +2,7 @@
 if (!defined('WEB_ROOT')) {
 	exit;
 }
+//session_start();
 
 // set the default page title
 $pageTitle = 'My Online Shop';
@@ -31,12 +32,25 @@ if (isset($_GET['p']) && (int)$_GET['p'] > 0) {
 	$pageTitle = $row['cat_name'];
 }
 ?>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html>
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<title><?php echo $pageTitle; ?></title>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-7">
-<link href="include/shop.css" rel="stylesheet" type="text/css">
-<script language="JavaScript" type="text/javascript" src="library/common.js"></script>
+	<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+	<title>Free CSS template by ChocoTemplates.com</title>
+	<link rel="stylesheet" href="css/style.css" type="text/css" media="all" />
+	<!--[if lte IE 6]><link rel="stylesheet" href="css/ie6.css" type="text/css" media="all" /><![endif]-->
+	
+	<meta name="keywwords" content="Shop Around - Great free html template for on-line shop. Use it as a start point for your on line business. The template can be easily implemented in many open source E-commerce platforms" />
+	<meta name="description" content="Shop Around - Great free html template for on-line shop. Use it as a start point for your on line business. The template can be easily implemented in many open source E-commerce platforms" />
+	
+	<!-- JS -->
+        <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+	<script src="js/jquery-1.4.1.min.js" type="text/javascript"></script>	
+	<script src="js/jquery.jcarousel.pack.js" type="text/javascript"></script>	
+	<script src="js/jquery-func.js" type="text/javascript"></script>	
+	<!-- End JS -->
+	
 </head>
 <body>

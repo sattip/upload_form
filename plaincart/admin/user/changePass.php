@@ -37,18 +37,18 @@ require_once 'lib/header1.php';
 <form action="<?php echo $_SERVER['REQUEST_URI']; ?>" method="post" name="frmPassword" id="frmPassword">
  <table width="550" border="0" align="center" cellpadding="2" cellspacing="1" class="whiteTable">
   <tr> 
-   <td width="150" align="left" valign="top">&Pi;&alpha;&lambda;&iota;ό&sigmaf; &Kappa;&omega;&delta;&iota;&kappa;ό&sigmaf;</td>
+   <td width="150" align="left" valign="top">Old Password</td>
    <td width="10" align="left" valign="top">:</td>
    <td align="left" valign="top"> 
     <input name="txtOldPassword" type="password" class="box" id="txtOldPassword" size="20" maxlength="20"></td>
  </tr>
  <tr> 
-   <td width="150" align="left" valign="top">&Nu;έ&omicron;&sigmaf; &Kappa;&omega;&delta;&iota;&kappa;ό&sigmaf;</td>
+   <td width="150" align="left" valign="top">New Password</td>
    <td width="10" align="left" valign="top">:</td>
    <td align="left" valign="top"><input name="txtNewPassword1" type="password" class="box" id="txtNewPassword1" size="20" maxlength="20"></td>
  </tr>
 <tr> 
-   <td width="150" align="left" valign="top">&Epsilon;&pi;&alpha;&nu;ά&lambda;&eta;&psi;&eta; &Nu;έ&omicron;&upsilon; &Kappa;&omega;&delta;&iota;&kappa;&omicron;ύ</td>
+   <td width="150" align="left" valign="top">Repeat New Password</td>
    <td width="10" align="left" valign="top">:</td>
    <td align="left" valign="top"> 
     <input name="txtNewPassword2" type="password" class="box" id="txtNewPassword2" size="20" maxlength="20">
@@ -61,9 +61,9 @@ require_once 'lib/header1.php';
  </tr>
  <tr> 
   <td colspan="3"><div align="center"> 
-    <input name="btnModify" type="submit" class="bluebox" id="btnModify" value="Καταχώρηση" onClick="return checkPassword();">
+    <input name="btnModify" type="submit" class="bluebox" id="btnModify" value="Submit" onClick="return checkPassword();">
     &nbsp;&nbsp; 
-    <input name="btnCancel" type="button" class="bluebox" id="btnCancel" onClick="window.location.href='listUser.php';" value="¶κυρο">
+    <input name="btnCancel" type="button" class="bluebox" id="btnCancel" onClick="window.location.href='listUser.php';" value="Cancel">
    </div></td>
  </tr>
  <tr>

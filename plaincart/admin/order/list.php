@@ -27,7 +27,7 @@ $sql = "SELECT o.od_id, o.od_shipping_first_name, od_shipping_last_name, od_date
 $result     = dbQuery(getPagingQuery($sql, $rowsPerPage));
 $pagingLink = getPagingLink($sql, $rowsPerPage, $queryString);
 
-$orderStatus = array('IYao', 'DecnuiYiao', 'A?aooaeiYiao', 'IeieecnuiYiao', 'AeonuiYiao');
+$orderStatus = array('New', 'Paid', 'Shipped', 'Completed', 'Cancelled');
 $orderOption = '';
 foreach ($orderStatus as $stat) {
 	$orderOption .= "<option value=\"$stat\"";
@@ -42,9 +42,9 @@ foreach ($orderStatus as $stat) {
 <form action="processOrder.php" method="post"  name="frmOrderList" id="frmOrderList">
  <table width="100%" border="0" cellspacing="0" cellpadding="2" class="text">
  <tr align="center"> 
-  <td align="right">Dniaie?</td>
+  <td align="right">View</td>
   <td width="75"><select name="cboOrderStatus" class="box" id="cboOrderStatus" onChange="viewOrder();">
-    <option value="" selected>όλες</option>
+    <option value="" selected>All</option>
     <?php echo $orderOption; ?>
   </select></td>
   </tr>
@@ -52,11 +52,11 @@ foreach ($orderStatus as $stat) {
 
  <table width="100%" border="0" align="center" cellpadding="2" cellspacing="1" class="text">
   <tr align="center" id="listTableHeader"> 
-   <td width="60">&Pi;&alpha;&rho;&alpha;&gamma;&gamma;&epsilon;&lambda;ί&alpha; #</td>
-   <td>Ό&nu;&omicron;&mu;&alpha; &Pi;&epsilon;&lambda;ά&tau;&eta;</td>
-   <td width="60">&Pi;&omicron;&sigma;ό</td>
-   <td width="150">&Eta;&mu;&epsilon;&rho;&omicron;&mu;&eta;&nu;ί&alpha; &Pi;&alpha;&rho;&alpha;&gamma;&gamma;&epsilon;&lambda;ί&alpha;&sigmaf;</td>
-   <td width="70">&Kappa;&alpha;&tau;ά&sigma;&tau;&alpha;&sigma;&eta;</td>
+   <td width="60">Order #</td>
+   <td>Customer Name</td>
+   <td width="60">Amount</td>
+   <td width="150">Order Time</td>
+   <td width="70">Status</td>
   </tr>
   <?php
 $parentId = 0;
@@ -96,7 +96,7 @@ if (dbNumRows($result) > 0) {
 } else {
 ?>
   <tr> 
-   <td colspan="5" align="center">&Delta;&epsilon;&nu; &upsilon;&pi;ά&rho;&chi;&omicron;&upsilon;&nu; &pi;&alpha;&rho;&alpha;&gamma;&gamma;&epsilon;&lambda;ί&epsilon;&sigmaf;</td>
+   <td colspan="5" align="center">No Orders Found </td>
   </tr>
   <?php
 }

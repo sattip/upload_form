@@ -1,5 +1,5 @@
 <?php
-require_once '../library/config.php';
+require_once '../../library/config.php';
 require_once '../library/functions.php';
 
 $_SESSION['login_return_url'] = $_SERVER['REQUEST_URI'];
@@ -10,27 +10,27 @@ $view = (isset($_GET['view']) && $_GET['view'] != '') ? $_GET['view'] : '';
 switch ($view) {
 	case 'list' :
 		$content 	= 'list.php';		
-		$pageTitle 	= 'Shop Admin Control Panel - Προβολή Προϊόντος';
+		$pageTitle 	= 'Shop Admin Control Panel - View Product';
 		break;
 
 	case 'add' :
 		$content 	= 'add.php';		
-		$pageTitle 	= 'Shop Admin Control Panel - Προσθήκη Προϊόντος';
+		$pageTitle 	= 'Shop Admin Control Panel - Add Product';
 		break;
 
 	case 'modify' :
 		$content 	= 'modify.php';		
-		$pageTitle 	= 'Shop Admin Control Panel - Τροποποίήση Προϊόντος';
+		$pageTitle 	= 'Shop Admin Control Panel - Modify Product';
 		break;
 
 	case 'detail' :
 		$content    = 'detail.php';
-		$pageTitle  = 'Shop Admin Control Panel - Προβολή Πληροφοριών Προϊόντος';
+		$pageTitle  = 'Shop Admin Control Panel - View Product Detail';
 		break;
 		
 	default :
 		$content 	= 'list.php';		
-		$pageTitle 	= 'Shop Admin Control Panel - Προβολή Προϊόντος';
+		$pageTitle 	= 'Shop Admin Control Panel - View Product';
 }
 
 
@@ -38,5 +38,5 @@ switch ($view) {
 
 $script    = array('product.js');
 
-require_once '../include/template.php';
+require_once '../include/adminpanel.php';
 ?>

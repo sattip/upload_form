@@ -40,18 +40,18 @@ while ($row = dbFetchAssoc($result)) {
 <form action="processConfig.php?action=modify" method="post" name="frmConfig" id="frmConfig">
  <table width="100%" border="0" cellspacing="1" cellpadding="2" class="entryTable">
   <tr id="entryTableHeader"> 
-   <td colspan="2">&Delta;&iota;&alpha;&chi;&epsilon;ί&rho;&eta;&sigma;&eta; &Kappa;&alpha;&tau;&alpha;&sigma;&tau;ή&mu;&alpha;&tau;&omicron;&sigmaf;</td>
+   <td colspan="2">Shop Configuration</td>
   </tr>
   <tr> 
-   <td width="150" class="label">Ό&nu;&omicron;&mu;&alpha; &kappa;&alpha;&tau;&alpha;&sigma;&tau;ή&mu;&alpha;&tau;&omicron;&sigmaf;</td>
+   <td width="150" class="label">Shop Name</td>
    <td class="content"><input name="txtShopName" type="text" class="box" id="txtShopName" value="<?php echo $sc_name; ?>" size="50" maxlength="50"></td>
   </tr>
   <tr> 
-   <td width="150" class="label">&Delta;&iota;&epsilon;ύ&theta;&upsilon;&nu;&sigma;&eta;</td>
+   <td width="150" class="label">Address</td>
    <td class="content"><textarea name="mtxAddress" cols="50" rows="3" id="mtxAddress" class="box"><?php echo $sc_address; ?></textarea></td>
   </tr>
   <tr> 
-   <td width="150" class="label">&Tau;&eta;&lambda;έ&phi;&omega;&nu;&omicron;</td>
+   <td width="150" class="label">Telephone</td>
    <td class="content"><input name="txtPhone" type="text" class="box" id="txtPhone" value="<?php echo $sc_phone; ?>" size="30" maxlength="30"></td>
   </tr>
   <tr> 
@@ -62,27 +62,27 @@ while ($row = dbFetchAssoc($result)) {
  <p>&nbsp;</p>
  <table width="100%" border="0" cellspacing="1" cellpadding="2" class="entryTable">
   <tr id="entryTableHeader"> 
-   <td colspan="2">&Pi;&rho;ό&sigma;&theta;&epsilon;&tau;&epsilon;&sigmaf; &Rho;&upsilon;&theta;&mu;ί&sigma;&epsilon;&iota;&sigmaf;</td>
+   <td colspan="2">Misc. Configuration</td>
   </tr>
   <tr> 
-   <td width="150" class="label">&Nu;ό&mu;&iota;&sigma;&mu;&alpha;</td>
+   <td width="150" class="label">Currency</td>
    <td class="content"><select name="cboCurrency" id="cboCurrency" class="box">
 <?php echo $currency; ?>
     </select>   </td>
   </tr>
   <tr> 
-   <td width="150" class="label">Έ&xi;&omicron;&delta;&alpha; &Alpha;&pi;&omicron;&sigma;&tau;&omicron;&lambda;ή&sigmaf;</td>
+   <td width="150" class="label">Shipping Cost</td>
    <td class="content"><input name="txtShippingCost" type="text" class="box" id="txtShippingCost" value="<?php echo $sc_shipping_cost; ?>" size="5"></td>
   </tr>
   <tr>
-    <td class="label">&Alpha;&pi;&omicron;&sigma;&tau;&omicron;&lambda;ή Email &sigma;&epsilon; &nu;έ&alpha; &pi;&alpha;&rho;&alpha;&gamma;&gamma;&epsilon;&lambda;ί&alpha; </td>
+    <td class="label">Send Email on New Order </td>
     <td class="content"><input name="optSendEmail" type="radio" value="y" id="optEmail" <?php echo $sc_order_email == 'y' ? 'checked' : ''; ?> />
-      <label for="optsEmail">&Nu;&alpha;&iota; </label>
+      <label for="optsEmail">Yes </label>
       <input name="optSendEmail" type="radio" value="n" id="optNoEmail" <?php echo $sc_order_email == 'n' ? 'checked' : ''; ?> />
-      <label for="optNoEmail">Ό&chi;&iota;</label></td>
+      <label for="optNoEmail">No</label></td>
   </tr>
  </table>
  <p align="center"> 
-  <input name="btnUpdate" type="submit" id="btnUpdate" value="Ενημέρωση" class="box">
+  <input name="btnUpdate" type="submit" id="btnUpdate" value="Update Config" class="box">
  </p>
 </form>

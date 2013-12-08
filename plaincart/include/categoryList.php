@@ -34,7 +34,7 @@ if ($numCategory > 0) {
 	}
 } else {
 ?>
-	<tr><td width="100%" align="center" valign="center">&Delta;&epsilon;&nu; &upsilon;&pi;Ü&rho;&chi;&omicron;&upsilon;&nu; &kappa;&alpha;&tau;&eta;&gamma;&omicron;&rho;ß&epsilon;&sigmaf;</td></tr>
+	<tr><td width="100%" align="center" valign="center">No categories yet</td></tr>
 <?php	
 }	
 ?>

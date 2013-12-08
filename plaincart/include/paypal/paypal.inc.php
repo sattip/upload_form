@@ -8,8 +8,8 @@
 
 $paypal = array();
 
-$paypal['business']      = "armanpi@phpwebcommerce.com";
-$paypal['site_url']      = "http://www.phpwebcommerce.com/plaincart/";
+$paypal['business']      = "pramodhkumar.it@gmail.com";
+$paypal['site_url']      = " ";
 $paypal['image_url']     = "";
 $paypal['success_url']   = "success.php";
 $paypal['cancel_url']    = "error.php";

@@ -6,16 +6,12 @@ error_reporting(E_ALL);
 // start the session
 session_start();
 
+
 // database connection config
 $dbHost = 'localhost';
 $dbUser = 'root';
 $dbPass = '';
 $dbName = 'plaincart';
-
-$link   = mysql_pconnect($dbHost, $dbUser, $dbPass);
-		$select = mysql_select_db($dbName, $link);
-		mysql_query('set character set greek',$link);       
-         mysql_query("SET NAMES 'greek'",$link);
 
 // setting up the web root and server root for
 // this shopping cart application
@@ -38,7 +34,7 @@ define('PRODUCT_IMAGE_DIR',  'images/product/');
 
 // all category image width must not 
 // exceed 75 pixels
-define('MAX_CATEGORY_IMAGE_WIDTH', 75);
+define('MAX_CATEGORY_IMAGE_WIDTH', 150);
 
 // do we need to limit the product image width?
 // setting this value to 'true' is recommended

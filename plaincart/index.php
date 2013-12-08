@@ -11,6 +11,13 @@ $pdId   = (isset($_GET['p']) && $_GET['p'] != '') ? $_GET['p'] : 0;
 
 require_once 'include/header.php';
 ?>
+<style>
+    #wrapper{
+            background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAIklEQVQIHWNgYGCQ/P//PwMMM4IYyIAJxmFkZJQEsTFUAADQzg8royVN5AAAAABJRU5ErkJggg==");
+    padding-bottom: 1.618em;
+    }
+    </style>
+
 <table width="780" border="1" align="center" cellpadding="0" cellspacing="0">
  <tr> 
   <td colspan="3">
@@ -37,6 +44,9 @@ if ($pdId) {
   <td width="130" align="center"><?php require_once 'include/miniCart.php'; ?></td>
  </tr>
 </table>
+    </div>
+  
+     
 <?php
 require_once 'include/footer.php';
 ?>

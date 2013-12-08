@@ -10,7 +10,7 @@ if (!isset($orderId)) {
 
 require_once 'paypal.inc.php';
 
-$paypal['item_name'] = "PlainCart Purchase";
+$paypal['item_name'] = "Purchase";
 $paypal['invoice']   = $orderId;
 $paypal['amount']    = $orderAmount;
 ?>

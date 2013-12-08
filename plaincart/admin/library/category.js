@@ -2,9 +2,9 @@
 function checkCategoryForm()
 {
     with (window.document.frmCategory) {
-		if (isEmpty(txtName, 'Εισάγετε όνομα κατηγορίας')) {
+		if (isEmpty(txtName, 'Enter category name')) {
 			return;
-		} else if (isEmpty(mtxDescription, 'Εισάγετε περιγραφή κατηγορίας')) {
+		} else if (isEmpty(mtxDescription, 'Enter category description')) {
 			return;
 		} else {
 			submit();
@@ -12,16 +12,20 @@ function checkCategoryForm()
 	}
 }
 
+//function addCategory(parentId)
+//{
+//	targetUrl = 'index.php?view=add';
+//	if (parentId != 0) {
+//		targetUrl += '&parentId=' + parentId;
+//	}
+//	
+//	window.location.href = targetUrl;
+//}
+
 function addCategory(parentId)
 {
-	targetUrl = 'index.php?view=add';
-	if (parentId != 0) {
-		targetUrl += '&parentId=' + parentId;
-	}
-	
-	window.location.href = targetUrl;
+	window.location.href = 'index.php?view=add&catId=' + parentId;
 }
-
 function modifyCategory(catId)
 {
 	window.location.href = 'index.php?view=modify&catId=' + catId;
@@ -29,14 +33,14 @@ function modifyCategory(catId)
 
 function deleteCategory(catId)
 {
-	if (confirm('Διαγράφοντας την Κατηγορία θα διαγραφούν και όλα τα προϊόντα.\nΕίστε σίγουρος ότι θέλετε να συνεχίσετε;')) {
+	if (confirm('Deleting category will also delete all products in it.\nContinue anyway?')) {
 		window.location.href = 'processCategory.php?action=delete&catId=' + catId;
 	}
 }
 
 function deleteImage(catId)
 {
-	if (confirm('Θέλετε σίγουρα να διαγράψετε την εικόνα;')) {
+	if (confirm('Delete this image?')) {
 		window.location.href = 'processCategory.php?action=deleteImage&catId=' + catId;
 	}
 }

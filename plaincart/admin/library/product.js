@@ -14,10 +14,10 @@ function checkAddProductForm()
 {
 	with (window.document.frmAddProduct) {
 		if (cboCategory.selectedIndex == 0) {
-			alert('Επιλέξτε κατηγορία');
+			alert('Choose the product category');
 			cboCategory.focus();
 			return;
-		} else if (isEmpty(txtName, 'Εισάγετε όνομα προϊόντος')) {
+		} else if (isEmpty(txtName, 'Enter Product name')) {
 			return;
 		} else {
 			submit();
@@ -37,14 +37,14 @@ function modifyProduct(productId)
 
 function deleteProduct(productId, catId)
 {
-	if (confirm('Ειστε σίγουρος ότι θέλετε να διαγράψετε το προϊόν;')) {
+	if (confirm('Delete this product?')) {
 		window.location.href = 'processProduct.php?action=deleteProduct&productId=' + productId + '&catId=' + catId;
 	}
 }
 
 function deleteImage(productId)
 {
-	if (confirm('Ειστε σίγουρος ότι θέλετε να διαγράψετε την εικόνα;')) {
+	if (confirm('Delete this image')) {
 		window.location.href = 'processProduct.php?action=deleteImage&productId=' + productId;
 	}
 }

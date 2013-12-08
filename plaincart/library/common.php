@@ -59,7 +59,9 @@ function getShopConfig()
 function displayAmount($amount)
 {
 	global $shopConfig;
+        
 	return $shopConfig['currency'] . number_format($amount);
+        
 }
 
 /*

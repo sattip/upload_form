@@ -2,9 +2,9 @@
 function checkAddUserForm()
 {
 	with (window.document.frmAddUser) {
-		if (isEmpty(txtUserName, 'Είσάγετε όνομα χρήστη')) {
+		if (isEmpty(txtUserName, 'Enter user name')) {
 			return;
-		} else if (isEmpty(txtPassword, 'Εισάγετε κωδικό')) {
+		} else if (isEmpty(txtPassword, 'Enter password')) {
 			return;
 		} else {
 			submit();

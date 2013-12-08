@@ -59,42 +59,43 @@ foreach ($categories as $key => $value) {
 }
 ?> 
 <form action="processProduct.php?action=modifyProduct&productId=<?php echo $productId; ?>" method="post" enctype="multipart/form-data" name="frmAddProduct" id="frmAddProduct">
- <p align="center" class="formTitle">Επεξεργασίας Προϊόντος</p>
+ <p align="center" class="formTitle">Modify Product</p>
  
  <table width="100%" border="0" align="center" cellpadding="5" cellspacing="1" class="entryTable">
   <tr> 
-   <td width="150" class="label">Κατηγορία</td>
+   <td width="150" class="label">Category</td>
    <td class="content"> <select name="cboCategory" id="cboCategory" class="box">
-     <option value="" selected>-- Επέλεξε Κατηγορία --</option>
+     <option value="" selected>-- Choose Category --</option>
 <?php
 	echo $list;
 ?>	 
     </select></td>
   </tr>
   <tr> 
-   <td width="150" class="label">Όνομα Προϊόντος</td>
+   <td width="150" class="label">Product Name</td>
    <td class="content"> <input name="txtName" type="text" class="box" id="txtName" value="<?php echo $pd_name; ?>" size="50" maxlength="100"></td>
   </tr>
   <tr> 
-   <td width="150" class="label">Περιγραφή</td>
+   <td width="150" class="label">Description</td>
    <td class="content"> <textarea name="mtxDescription" cols="70" rows="10" class="box" id="mtxDescription"><?php echo $pd_description; ?></textarea></td>
   </tr>
   <tr> 
-   <td width="150" class="label">Τιμή</td>
+   <td width="150" class="label">Price</td>
    <td class="content"><input name="txtPrice" type="text" class="box" id="txtPrice" value="<?php echo $pd_price; ?>" size="10" maxlength="7"> </td>
   </tr>
   <tr> 
-   <td width="150" class="label">Ποσότητα σε απόθεμα</td>
+   <td width="150" class="label">Qty In Stock</td>
    <td class="content"><input name="txtQty" type="text" class="box" id="txtQty" value="<?php echo $pd_qty;  ?>" size="10" maxlength="10"> </td>
   </tr>
   <tr> 
-   <td width="150" class="label">Εικόνα</td>
+   <td width="150" class="label">Image</td>
    <td class="content"> <input name="fleImage" type="file" id="fleImage" class="box">
 <?php
 	if ($pd_thumbnail != '') {
 ?>
     <br>
-    <img src="<?php echo WEB_ROOT . PRODUCT_IMAGE_DIR . $pd_thumbnail; ?>"> &nbsp;&nbsp;<a href="javascript:deleteImage(<?php echo $productId; ?>);">Διαγραφή Εικόνας</a> 
+    <img src="<?php echo WEB_ROOT . PRODUCT_IMAGE_DIR . $pd_thumbnail; ?>"> &nbsp;&nbsp;<a href="javascript:deleteImage(<?php echo $productId; ?>);">Delete 
+    Image</a> 
     <?php
 	}
 ?>    
@@ -102,7 +103,7 @@ foreach ($categories as $key => $value) {
   </tr>
  </table>
  <p align="center"> 
-  <input name="btnModifyProduct" type="button" id="btnModifyProduct" value="Αποθήκευση" onClick="checkAddProductForm();" class="box">
-  &nbsp;&nbsp;<input name="btnCancel" type="button" id="btnCancel" value="Ακύρο" onClick="window.location.href='index.php';" class="box">  
+  <input name="btnModifyProduct" type="button" id="btnModifyProduct" value="Modify Product" onClick="checkAddProductForm();" class="box">
+  &nbsp;&nbsp;<input name="btnCancel" type="button" id="btnCancel" value="Cancel" onClick="window.location.href='index.php';" class="box">  
  </p>
 </form>

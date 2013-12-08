@@ -19,7 +19,7 @@ if ($numItem > 0) {
 	for ($i = 0; $i < $numItem; $i++) {
 		extract($cartContent[$i]);
 		$pd_name = "$ct_qty x $pd_name";
-		$url = "index.php?c=$cat_id&p=$pd_id";
+		$url = "main.php?c=$cat_id&p=$pd_id";
 		
 		$subTotal += $pd_price * $ct_qty;
 ?>
