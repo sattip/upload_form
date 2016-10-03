@@ -25,7 +25,7 @@ PHP Lab1
 #####Setup PHP
 
 - Εγκατάσταση Xampp (https://www.apachefriends.org/index.html)
-- Ξεκινάμε τον Apache και MySQL (Tip κλείστε Skype)
+- Ξεκινάμε τον Apache και MySQL (Προσοχή: κλείστε το Skype)
 - Πρόσβαση στο http://localhost/
 
 
