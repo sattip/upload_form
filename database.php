@@ -1,12 +1,15 @@
 <?php
 
-  // This page contains the connection routine for the
+        // This page contains the connection routine for the
 	// database as well as getting the ID of the cart, etc
 
-	$dbServer = "localhost";
-	$dbUser = "root";
-	$dbPass = "";
-	$dbName = "uploadform";
+        $jsonStr = file_get_contents("config.json");
+        $config = json_decode($jsonStr);
+
+	$dbServer = $config->database->host;
+	$dbUser = $config->database->user;
+	$dbPass = $config->database->password;
+	$dbName = $config->database->dbname;
 
 	function ConnectToDb ($server, $user, $pass, $database) {
 		// Connect to the database and return
